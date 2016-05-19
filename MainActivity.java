@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements PingConnection.Pi
                 case 0x03:
                     long pong_id = incomingMessage.integer32();
                     textView.append("\npong-message-arrived: " + pong_id);
+                    Log.d(TAG,"pong response");
                     break;
                 case 0x08:
                     textView.append("\nmessage-type-container");
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements PingConnection.Pi
                     String itemDataName = incomingMessage.text();
                     String itemDataDescription = incomingMessage.text();
                     boolean itemDataInternal = incomingMessage.binary8();
-
+                    Log.d(TAG,"pong response1");
                     textView.append("item-identifier: " + itemIdentifier + "\n");
                     textView.append("item-data-parent-identifier: " + itemDataParentIdentifier + "\n");
                     textView.append("item-data-name: " + itemDataName + "\n");
@@ -68,10 +69,12 @@ public class MainActivity extends AppCompatActivity implements PingConnection.Pi
                     break;
                 default:
                     textView.append("Unrecognised message type");
+                    Log.d(TAG,"pong response3");
                     break;
             }
         } else {
             textView.setText("No incoming msgs yet.");
+            Log.d(TAG,"pong response3");
         }
     }
     @Override

@@ -143,15 +143,15 @@ public class PingConnection {
                 outgoingMessageHandler.post(new OutgoingMessageAction(outgoingMessage));
                 while(running){
                     if(socket!=null){
-
                         try {
                             Log.d(TAG, "Just about to read from input stream");
                             IncomingMessage incomingMessage= new IncomingMessage();
                             incomingMessage.readFrom(inputStream);
-                            if(incomingMessage.toString().length()>0){
+                           // if(incomingMessage.){
                                 dataCame = true;
-                                Log.d(TAG, "Incoming Message String" + incomingMessage.toString()+ " Length: " + incomingMessage.toString().length());
-                            }
+                            Log.d(TAG, "Incoming Message String");
+                                    //Log.d(TAG, "Incoming Message String" + incomingMessage.toString()+ " Length: " + incomingMessage.toString().length());
+                            //}
 
                             if(dataCame==true){
                                 IncomingMessageAction incomingMessageAction= new IncomingMessageAction(incomingMessage);
@@ -213,14 +213,13 @@ public class PingConnection {
         public OutgoingMessageAction(OutgoingMessage outgoingMessage) {
             this.outgoingMessage = outgoingMessage;
         }
-
         @Override
         public void run() {
             Log.d(TAG, "Outgoing msg: " + outgoingMessage);
 
             if(socket !=null && outputStream !=null){
                 try {
-                    Log.d(TAG, "Writing to out put stream of socket ");
+                    Log.d(TAG, "Writing to out put stream of socket "+ outputStream.toString());
                     ///////////////////////////////////////////
                     /*Keep an eye here*/
                     //////////////////////////////////////////
