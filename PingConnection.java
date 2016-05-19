@@ -117,20 +117,11 @@ public class PingConnection {
         @Override
         public void run() {
             super.run();
-            Socket socket=new Socket();
+            socket=new Socket();
             try {
 
 
                 socket.setSoTimeout(5000);
-
-                /*SocketAddress socketAddress= new SocketAddress() {
-                    @Override
-                    public String toString() {
-                        return url.getHost()+url.getPort();
-                    }
-                };*/
-
-
 
                 InetSocketAddress address = new InetSocketAddress(url.getHost(),url.getPort());
                 Log.d(TAG, " Socket address=" + address);
@@ -157,9 +148,9 @@ public class PingConnection {
                             Log.d(TAG, "Just about to read from input stream");
                             IncomingMessage incomingMessage= new IncomingMessage();
                             incomingMessage.readFrom(inputStream);
-                            if(incomingMessage.text().length()>0){
+                            if(incomingMessage.toString().length()>0){
                                 dataCame = true;
-                                Log.d(TAG, "Incoming Message String" + incomingMessage.text() + " Length: " + incomingMessage.text().length());
+                                Log.d(TAG, "Incoming Message String" + incomingMessage.toString()+ " Length: " + incomingMessage.toString().length());
                             }
 
                             if(dataCame==true){
@@ -173,8 +164,6 @@ public class PingConnection {
                             Log.d(TAG, "Main while loop is restarted");
                             //e.printStackTrace();
                         }
-
-
 
                     }
                 }

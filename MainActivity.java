@@ -86,12 +86,19 @@ public class MainActivity extends AppCompatActivity implements PingConnection.Pi
     protected void onStop() {
 
         super.onStop();
-        Log.d(TAG, "stopping Ping connect from onStop");
-        counter=0;
-        pingConnection.stop();
 
 
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "stopping Ping connect from onDestroy");
+        counter=0;
+        pingConnection.stop();
+
+    }
+
     public void pingButtonClick(View view){
         Log.d(TAG, "Trying to ping on click");
 
