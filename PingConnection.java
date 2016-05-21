@@ -52,9 +52,17 @@ public class PingConnection {
         Log.d(TAG,"Sigelton Initialized");
     }
     public void start(PingObserver obs){
-        this.observer=obs;
-        Log.d(TAG,"Starting Networking");
-        startNetworking();
+        //if(socket==null || outputStream==null){
+            this.observer=obs;
+            Log.d(TAG,"Starting Networking");
+            startNetworking();
+        //}else {
+          //  Log.d(TAG, "OutgoingMessageAction: connection not ready, postponing");
+            //if (null != outgoingMessageHandler) {
+              //  outgoingMessageHandler.postDelayed(, 1000);
+           // }
+        //}
+
 
     }
     public void stop(){
@@ -90,6 +98,13 @@ public class PingConnection {
     }
     private void stopNetworking(){
         try {
+            Log.d(TAG, "stopNetworking");
+            if (null != socket) {
+                OutgoingMessage outgoingMessage = new OutgoingMessage();
+                outgoingMessage.integer8(0x01)
+                        .text("Thank you for testing the app");
+                outgoingMessageHandler.post(new OutgoingMessageAction(outgoingMessage));
+            }
             running=false;
             handlerThread.stop();
             handlerThread=null;
@@ -224,7 +239,7 @@ public class PingConnection {
                     /*Keep an eye here*/
                     //////////////////////////////////////////
                     outgoingMessage.writeTo(outputStream);
-                    socket.getOutputStream().write(outputStream.toString().getBytes());
+                    //socket.getOutputStream().write(outputStream.toString().getBytes());
                 } catch (IOException e) {
                     Log.d(TAG, "Error writing in outputstream in OutgoingMessageAction");
                     e.printStackTrace();
